@@ -18,6 +18,7 @@ function App() {
         <p>
           Edit <code>App.jsx</code> and save to test HMR updates.
         </p>
+        <p>{import.meta.env.VITE_PASS}</p>
         <p>
           <a
             className="App-link"
