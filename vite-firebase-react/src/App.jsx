@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { login, logout, selectUser } from "./userSlice"
+import { login, logout, selectUser } from "./feature/userSlice"
 import { auth } from "./firebase"
 import Auth from "./Auth";
 import Admin from "./Admin";
