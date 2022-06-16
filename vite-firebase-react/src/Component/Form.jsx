@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Form.module.css";
 import { Button, Container, Stack, TextField } from "@mui/material";
 import { useSelector } from "react-redux";
@@ -33,13 +33,22 @@ const Form = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    reset,
+    formState: { errors, isSubmitSuccessful },
     getValues,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
   const [isConfirm, setIsConfirm] = useState(false);
+
+  useEffect(() => {
+    reset({
+      email: "",
+      name: "",
+      password: "",
+    });
+  }, [isSubmitSuccessful]);
 
   const sendInfo = async (data) => {
     await addDoc(collection(db, "testSubmit"), {
