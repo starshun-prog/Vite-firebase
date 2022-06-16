@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Form.module.css";
 import { Button, Container, Stack, TextField } from "@mui/material";
-import { useSelector } from "react-redux";
-import { selectUser } from "../feature/userSlice";
 import { db } from "../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { registerVersion } from "firebase/app";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -28,8 +25,6 @@ const schema = yup.object({
 });
 
 const Form = () => {
-  const user = useSelector(selectUser);
-
   const {
     register,
     handleSubmit,
