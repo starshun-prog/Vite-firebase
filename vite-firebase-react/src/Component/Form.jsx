@@ -34,14 +34,14 @@ const Form = () => {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
   const [isConfirm, setIsConfirm] = useState(false);
-  const [data, setData] = useState({ email: "", name: "", password: "" });
 
-  const sendInfo = async () => {
+  const sendInfo = async (data) => {
     await addDoc(collection(db, "testSubmit"), {
       name: data.name,
       email: data.email,
@@ -50,9 +50,9 @@ const Form = () => {
     });
   };
 
-  const dataSetHandler = (data) => {
-    console.log(data);
-    setData({ email: data.email, name: data.name, password: data.password });
+  const dataSetHandler = () => {
+    const values = getValues();
+    console.log(values);
     setIsConfirm(true);
   };
 
@@ -90,7 +90,7 @@ const Form = () => {
           color="primary"
           variant="contained"
           size="large"
-          onClick={!isConfirm ? handleSubmit(dataSetHandler) : sendInfo}
+          onClick={!isConfirm ? dataSetHandler : handleSubmit(sendInfo)}
         >
           {!isConfirm ? "確認" : "送信"}
         </Button>
