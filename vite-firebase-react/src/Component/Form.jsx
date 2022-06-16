@@ -25,6 +25,8 @@ const schema = yup.object({
 });
 
 const Form = () => {
+  const [isConfirm, setIsConfirm] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -34,8 +36,6 @@ const Form = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
-  const [isConfirm, setIsConfirm] = useState(false);
 
   useEffect(() => {
     reset({
