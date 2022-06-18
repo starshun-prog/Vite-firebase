@@ -1,14 +1,14 @@
 export const COLUMNS = [
-  { field: "id", headerName: "ID", width: 90 },
+  { field: "id", headerName: "ID", width: 250 },
   {
     field: "name",
     headerName: "お名前",
-    width: 150,
+    width: 200,
   },
   {
     field: "email",
     headerName: "メールアドレス",
-    width: 180,
+    width: 200,
   },
   //   {
   //     field: "product",
@@ -18,11 +18,11 @@ export const COLUMNS = [
   {
     field: "detail",
     headerName: "お問い合わせ内容",
-    width: 200,
+    width: 350,
   },
   {
     field: "timestamp",
     headerName: "お問い合わせ日時",
-    width: 150,
+    width: 200,
   },
 ];

@@ -9,10 +9,15 @@ import { Button } from "@mui/material";
 import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
 
-const MenuBar = () => {
+const MenuBar = ({ color, menuTitle }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="secondary">
+      <AppBar
+        position="static"
+        sx={{
+          backgroundColor: color,
+        }}
+      >
         <Toolbar>
           <IconButton
             size="large"
@@ -28,7 +33,7 @@ const MenuBar = () => {
             component="div"
             sx={{ flexGrow: 1, textAlign: "center" }}
           >
-            お問い合わせ一覧
+            {menuTitle}
           </Typography>
           {auth && (
             <div>

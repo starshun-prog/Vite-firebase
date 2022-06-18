@@ -6,7 +6,7 @@ import { login, logout, selectUser } from "./feature/userSlice";
 import { auth } from "./firebase";
 import Auth from "./Component/Auth";
 import Admin from "./Component/Admin";
-import Form from "./Component/Form";
+import ContactForm from "./Component/ContactForm";
 
 const App = () => {
   const user = useSelector(selectUser);
@@ -35,7 +35,7 @@ const App = () => {
       <Router>
         <Routes>
           <Route path={"/"} element={user.uid ? <Admin /> : <Auth />} />
-          <Route path={"/form"} element={<Form />} />
+          <Route path={"/form"} element={<ContactForm />} />
         </Routes>
       </Router>
     </>
