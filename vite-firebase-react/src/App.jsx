@@ -34,11 +34,7 @@ const App = () => {
     <>
       <Router>
         <Routes>
-          {user.uid ? (
-            <Route path={"/"} element={<Admin />} />
-          ) : (
-            <Route path={"/"} element={<Auth />} />
-          )}
+          <Route path={"/"} element={user.uid ? <Admin /> : <Auth />} />
           <Route path={"/form"} element={<Form />} />
         </Routes>
       </Router>
