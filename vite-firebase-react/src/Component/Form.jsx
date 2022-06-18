@@ -20,8 +20,12 @@ const schema = yup.object({
   email: yup
     .string()
     .required("必須項目です")
-    .email("正しいメールアドレスを入力してください"),
-  name: yup.string().required("必須項目です"),
+    .email("正しいメールアドレスを入力してください")
+    .max(200, "200文字以上入力できません"),
+  name: yup
+    .string()
+    .required("必須項目です")
+    .max(16, "16文字以上入力できません"),
   password: yup
     .string()
     .required("必須項目です")
