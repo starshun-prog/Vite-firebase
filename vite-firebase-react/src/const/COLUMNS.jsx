@@ -1,4 +1,22 @@
+import React from "react";
+import DetailButton from "../Component/DetailButton";
+import Status from "../Component/Status";
+
 export const COLUMNS = [
+  {
+    field: "status",
+    headerName: "対応状況",
+    width: 200,
+    disableClickEventBubbling: true,
+    renderCell: (params) => <Status params={params.row.status} />,
+  },
+  {
+    field: "more",
+    headerName: "詳細",
+    width: 200,
+    disableClickEventBubbling: true,
+    renderCell: (params) => <DetailButton params={params} />,
+  },
   { field: "id", headerName: "ID", width: 250 },
   {
     field: "name",
@@ -16,7 +34,7 @@ export const COLUMNS = [
   //     width: 110,
   //   },
   {
-    field: "detail",
+    field: "displayDetail",
     headerName: "お問い合わせ内容",
     width: 350,
   },

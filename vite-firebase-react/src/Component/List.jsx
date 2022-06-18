@@ -5,17 +5,9 @@ import { COLUMNS } from "../const/COLUMNS";
 import { db } from "../firebase";
 import MenuBar from "./Basic/MenuBar";
 import CustomNoRowsOverlay from "./Basic/NoRows";
-import styles from "./List.module.css";
 
 const List = () => {
-  const [posts, setPosts] = useState([
-    {
-      id: "",
-      name: "",
-      email: "",
-      timestamp: "",
-    },
-  ]);
+  const [posts, setPosts] = useState([{ id: "" }]);
   const [pageSize, setPageSize] = useState(5);
 
   useEffect(() => {
@@ -24,17 +16,18 @@ const List = () => {
       setPosts(
         snapshot.docs.map((doc) => ({
           id: doc.id,
+          status: doc.data().status ? doc.data().status : "未対応",
           name: doc.data().name,
           email: doc.data().email,
-          detail:
+          displayDetail:
             doc.data().detail.length >= 100
               ? doc.data().detail.slice(0, 99) + "..."
               : doc.data().detail,
-          timestamp: new Date(
-            doc.data().timestamp.toDate()
-          ).toLocaleDateString(),
+          detail: doc.data().detail,
+          timestamp: new Date(doc.data().timestamp.toDate()).toLocaleString(),
         }))
       );
+      posts.map((post) => console.log(post));
     });
     return () => {
       unSub();
@@ -49,6 +42,7 @@ const List = () => {
           rows={posts}
           columns={COLUMNS}
           pageSize={pageSize}
+          disableSelectionOnClick
           onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
           rowsPerPageOptions={[5, 10, 20]}
           pagination
