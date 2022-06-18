@@ -25,6 +25,7 @@ const List = () => {
           id: doc.id,
           name: doc.data().name,
           email: doc.data().email,
+          detail: doc.data().detail,
           timestamp: new Date(
             doc.data().timestamp.toDate()
           ).toLocaleDateString(),
@@ -37,11 +38,12 @@ const List = () => {
   }, []);
   return (
     <>
+      <MenuBar />
       <DataGrid
         rows={posts}
         columns={COLUMNS}
         pageSize={5}
-        rowsPerPageOptions={[5]}
+        rowsPerPageOptions={[10]}
         checkboxSelection
       />
     </>

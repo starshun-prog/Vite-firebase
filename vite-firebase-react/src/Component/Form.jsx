@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Form.module.css";
-import { Button, Container, Stack, TextField } from "@mui/material";
+import {
+  Button,
+  Container,
+  FormHelperText,
+  Stack,
+  TextField,
+} from "@mui/material";
 import { db } from "../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { Box } from "@mui/system";
 // import { FirebaseApp } from 'firebase/app'
 
 const schema = yup.object({
@@ -22,10 +29,15 @@ const schema = yup.object({
       /^(?=.*[A-Za-z])(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&].*$/,
       "英字・数字・記号が最低1文字必要です"
     ),
+  detail: yup
+    .string()
+    .required("必須項目です")
+    .max(2000, "2000文字いないで入力してください"),
 });
 
 const Form = () => {
   const [isConfirm, setIsConfirm] = useState(false);
+  const [charChout, setCharCount] = useState(0);
 
   const {
     register,
@@ -42,7 +54,9 @@ const Form = () => {
       email: "",
       name: "",
       password: "",
+      detail: "",
     });
+    setIsConfirm(false);
   }, [isSubmitSuccessful]);
 
   const sendInfo = async (data) => {
@@ -50,8 +64,15 @@ const Form = () => {
       name: data.name,
       email: data.email,
       password: data.password,
+      detail: data.detail,
       timestamp: serverTimestamp(),
     });
+  };
+
+  const charCountHandler = () => {
+    const values = getValues("detail");
+    const len = values.length;
+    setCharCount(len);
   };
 
   const dataSetHandler = () => {
@@ -90,6 +111,25 @@ const Form = () => {
           error={"password" in errors}
           helperText={errors.password?.message}
         />
+        <Box>
+          <TextField
+            fullWidth
+            required
+            label="お問い合わせ内容"
+            multiline
+            rows={6}
+            inputProps={{ readOnly: isConfirm }}
+            {...register("detail")}
+            error={"detail" in errors}
+            helperText={errors.detail?.message}
+            onChange={charCountHandler}
+          />
+          <FormHelperText
+            sx={{
+              textAlign: "right",
+            }}
+          >{`あと${2000 - charChout}文字`}</FormHelperText>
+        </Box>
         <Button
           color="primary"
           variant="contained"
