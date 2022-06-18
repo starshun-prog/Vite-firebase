@@ -1,7 +1,11 @@
-import { Box, Container, Grid, Paper, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Paper, Typography } from "@mui/material";
 import React from "react";
 
-const Complete = () => {
+const Complete = ({ setIsConfirm, setIsSubmitSuccessful }) => {
+  const backToForm = () => {
+    setIsSubmitSuccessful(false);
+    setIsConfirm(false);
+  };
   return (
     <Container maxWidth="sm" sx={{ pt: 5 }}>
       <Grid component={Paper} textAlign="center" padding="50px">
@@ -25,6 +29,13 @@ const Complete = () => {
           </Typography>
         </Box>
       </Grid>
+      <Button
+        variant="outlined"
+        sx={{ marginTop: "50px" }}
+        onClick={backToForm}
+      >
+        お問い合わせフォームに戻る
+      </Button>
     </Container>
   );
 };

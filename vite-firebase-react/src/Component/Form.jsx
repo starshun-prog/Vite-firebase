@@ -36,8 +36,7 @@ const schema = yup.object({
     .max(2000, "2000文字いないで入力してください"),
 });
 
-const Form = ({ setIsSubmitSuccessful }) => {
-  const [isConfirm, setIsConfirm] = useState(false);
+const Form = ({ setIsSubmitSuccessful, isConfirm, setIsConfirm }) => {
   const [data, setData] = useState({
     name: "",
     email: "",
