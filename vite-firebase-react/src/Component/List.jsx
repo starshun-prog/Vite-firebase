@@ -21,7 +21,7 @@ const List = () => {
           email: doc.data().email,
           displayDetail:
             doc.data().detail.length >= 100
-              ? doc.data().detail.slice(0, 99) + "..."
+              ? doc.data().detail.slice(0, 100) + "..."
               : doc.data().detail,
           detail: doc.data().detail,
           timestamp: new Date(doc.data().timestamp.toDate()).toLocaleString(),

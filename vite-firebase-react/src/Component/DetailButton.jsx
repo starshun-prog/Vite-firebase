@@ -34,8 +34,6 @@ const DetailButton = ({ params }) => {
     setOpen(false);
   };
 
-  //   const docRef = doc(db, "testSubmit", params.id);
-
   const saveChange = async () => {
     afterChanged !== "" &&
       (await updateDoc(doc(db, "testSubmit", params.id), {

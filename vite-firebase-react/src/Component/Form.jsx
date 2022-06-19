@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Form.module.css";
 import {
   Button,
   Container,
@@ -8,7 +7,6 @@ import {
   Paper,
   Stack,
   TextField,
-  Typography,
 } from "@mui/material";
 import { db } from "../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
@@ -145,11 +143,11 @@ const Form = ({ setIsSubmitSuccessful, isConfirm, setIsConfirm }) => {
             size="large"
             onClick={!isConfirm ? handleSubmit(dataSetHandler) : sendInfo}
           >
-            {!isConfirm ? "確認" : "送信"}
+            {!isConfirm ? "確認する" : "送信する"}
           </Button>
           {isConfirm && (
             <Button variant="outlined" onClick={() => setIsConfirm(false)}>
-              戻る
+              入力画面に戻る
             </Button>
           )}
         </Stack>
