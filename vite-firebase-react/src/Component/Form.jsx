@@ -15,6 +15,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Box } from "@mui/system";
 import Confirm from "./Confirm";
+import { sendMail } from "./function/sendMail";
 
 const schema = yup.object({
   email: yup
@@ -40,13 +41,14 @@ const schema = yup.object({
     .max(2000, "2000文字いないで入力してください"),
 });
 
-const Form = ({ setIsSubmitSuccessful, isConfirm, setIsConfirm }) => {
-  const [data, setData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    detail: "",
-  });
+const Form = ({
+  setIsSubmitSuccessful,
+  isConfirm,
+  setIsConfirm,
+  setSubmit,
+  data,
+  setData,
+}) => {
   const [charChout, setCharCount] = useState(0);
 
   const {
@@ -59,6 +61,7 @@ const Form = ({ setIsSubmitSuccessful, isConfirm, setIsConfirm }) => {
   });
 
   const sendInfo = async () => {
+    setSubmit(true);
     await addDoc(collection(db, "testSubmit"), {
       name: data.name,
       email: data.email,
@@ -67,6 +70,7 @@ const Form = ({ setIsSubmitSuccessful, isConfirm, setIsConfirm }) => {
       timestamp: serverTimestamp(),
       status: "未対応",
     });
+    // await sendMail(data.name, data.email, data.detail);
     setIsSubmitSuccessful(true);
   };
 

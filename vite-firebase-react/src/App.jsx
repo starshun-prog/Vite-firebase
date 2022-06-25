@@ -7,6 +7,7 @@ import { auth } from "./firebase";
 import Auth from "./Component/Auth";
 import Admin from "./Component/Admin";
 import ContactForm from "./Component/ContactForm";
+import ChatRoom from "./Component/ChatRoom";
 
 const App = () => {
   const user = useSelector(selectUser);
@@ -36,6 +37,7 @@ const App = () => {
         <Routes>
           <Route path={"/"} element={user.uid ? <Admin /> : <Auth />} />
           <Route path={"/form"} element={<ContactForm />} />
+          <Route path={"/:id"} element={<ChatRoom />} />
         </Routes>
       </Router>
     </>

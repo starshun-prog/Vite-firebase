@@ -7,11 +7,12 @@ import MenuBar from "./Basic/MenuBar";
 import CustomNoRowsOverlay from "./Basic/NoRows";
 
 const List = () => {
-  const [posts, setPosts] = useState([{ id: "" }]);
   const [pageSize, setPageSize] = useState(5);
+  const [posts, setPosts] = useState([]); // {id: ""}を消してDataGridにloading={posts.length === 0}を追記
+  const [rawData, setRawData] = useState([]);
 
   useEffect(() => {
-    const q = query(collection(db, "testSubmit"), orderBy("timestamp", "desc"));
+    const q = query(collection(db, "testSubmit"), orderBy("timestamp", "asc"));
     const unSub = onSnapshot(q, (snapshot) => {
       setPosts(
         snapshot.docs.map((doc) => ({
@@ -27,12 +28,16 @@ const List = () => {
           timestamp: new Date(doc.data().timestamp.toDate()).toLocaleString(),
         }))
       );
+      setRawData(posts);
       posts.map((post) => console.log(post));
     });
     return () => {
       unSub();
     };
   }, []);
+  const initialRow = posts.filter((post) => post.status === "未対応");
+  //   console.log(initialRow);
+  //   setPosts(posts);
   return (
     <>
       <MenuBar color="#9c27b0" menuTitle="お問い合わせ一覧" />
@@ -46,6 +51,21 @@ const List = () => {
           onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
           rowsPerPageOptions={[5, 10, 20]}
           pagination
+          loading={posts.length === 0}
+          // 初期フィルタリング
+          initialState={{
+            filter: {
+              filterModel: {
+                items: [
+                  {
+                    columnField: "status",
+                    operatorValue: "equals",
+                    value: "未対応",
+                  },
+                ],
+              },
+            },
+          }}
           components={{
             NoRowsOverlay: CustomNoRowsOverlay,
           }}

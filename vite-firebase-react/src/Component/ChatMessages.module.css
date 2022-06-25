@@ -1,0 +1,11 @@
+.ownMessage {
+  margin: 0;
+  padding: 20px;
+  list-style-type: none;
+  text-align: right;
+}
+.otherMessage {
+  margin: 0;
+  padding: 20px;
+  list-style-type: none;
+}

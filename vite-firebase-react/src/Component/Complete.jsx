@@ -1,11 +1,32 @@
 import { Box, Button, Container, Grid, Paper, Typography } from "@mui/material";
-import React from "react";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { db } from "../firebase";
 
-const Complete = ({ setIsConfirm, setIsSubmitSuccessful }) => {
+const Complete = ({ setIsConfirm, setIsSubmitSuccessful, data }) => {
   const backToForm = () => {
     setIsSubmitSuccessful(false);
     setIsConfirm(false);
   };
+  const [id, setId] = useState("");
+  useEffect(() => {
+    const q = query(collection(db, "testSubmit"), orderBy("timestamp", "desc"));
+    const unSub = onSnapshot(q, (snapshot) => {
+      snapshot.docs.map((doc) => {
+        if (
+          doc.data().name === data.name &&
+          doc.data().email === data.email &&
+          doc.data().detail === data.detail
+        ) {
+          setId(doc.id);
+        }
+      });
+    });
+    return () => {
+      unSub();
+    };
+  }, []);
   return (
     <Container maxWidth="sm" sx={{ pt: 5 }}>
       <Grid component={Paper} textAlign="center" padding="50px">
@@ -28,6 +49,7 @@ const Complete = ({ setIsConfirm, setIsSubmitSuccessful }) => {
             今しばらくお待ちください。
           </Typography>
         </Box>
+        <Link to={`/${id}`}>{`http://localhost:3000/${id}`}</Link>
       </Grid>
       <Button
         variant="outlined"

@@ -5,6 +5,7 @@ import { connectAuthEmulator, getAuth } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
+import { getDatabase } from "firebase/database";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -22,3 +23,4 @@ export const auth = getAuth(app);
 // connectAuthEmulator(auth, "http://localhost:9099");
 export const db = getFirestore(app);
 // connectFirestoreEmulator(db, 'localhost', 8080);
+export const rtbd = getDatabase(app);

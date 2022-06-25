@@ -8,8 +8,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Button } from "@mui/material";
 import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../feature/userSlice";
 
 const MenuBar = ({ color, menuTitle }) => {
+  const user = useSelector(selectUser);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -35,7 +38,7 @@ const MenuBar = ({ color, menuTitle }) => {
           >
             {menuTitle}
           </Typography>
-          {auth && (
+          {user.uid && (
             <div>
               <Button
                 variant="contained"
