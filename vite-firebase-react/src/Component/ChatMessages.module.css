@@ -1,11 +1,139 @@
 .ownMessage {
+  display: flex;
+  flex-direction: row-reverse;
   margin: 0;
   padding: 20px;
+  padding-right: 10px;
   list-style-type: none;
+  border-radius: 24px;
+  margin-left: auto;
+  margin-top: 30px;
+  max-width: 50%;
+}
+
+.ownMessage .chatName {
+  left: -420px;
   text-align: right;
 }
+
+.ownMessage .chatAvatar {
+  margin-top: 20px;
+  margin-left: 5px;
+}
+
+.ownMessage .chatbg {
+  padding: 20px;
+  border-radius: 24px;
+  background-color: greenyellow;
+  margin: 32px 12px 0;
+  position: relative;
+  max-width: 100%;
+}
+
+.ownMessage .chatbg::before {
+  content: "";
+  height: 30px;
+  width: 20px;
+  background-color: greenyellow;
+  position: absolute;
+  top: 10px;
+  right: -6px;
+  transform: rotate(20deg);
+  border-bottom-right-radius: 200px;
+}
+
+.ownMessage .chatbg::after {
+  content: "";
+  height: 15px;
+  width: 18px;
+  background-color: #90caf9;
+  position: absolute;
+  top: 0px;
+  right: -13px;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 30%;
+  transform: rotate(110deg);
+}
+
+.ownMessage .chatTime {
+  align-self: flex-end;
+}
+
 .otherMessage {
+  display: flex;
   margin: 0;
   padding: 20px;
+  padding-left: 10px;
   list-style-type: none;
+  border-radius: 24px;
+  margin-right: auto;
+  margin-top: 30px;
+  width: 1000px;
+  max-width: 30%;
+}
+
+.otherMessage .chatName {
+  left: 60px;
+}
+
+.otherMessage .chatAvatar {
+  margin-top: 20px;
+  margin-right: 5px;
+}
+
+.otherMessage .chatbg {
+  padding: 20px;
+  border-radius: 24px;
+  background-color: white;
+  max-width: 100%;
+  margin: 32px 12px 0;
+  position: relative;
+}
+
+.otherMessage .chatbg::before {
+  content: "";
+  height: 30px;
+  width: 20px;
+  background-color: white;
+  position: absolute;
+  top: 10px;
+  left: -4px;
+  transform: rotate(-20deg);
+}
+
+.otherMessage .chatbg::after {
+  content: "";
+  height: 15px;
+  width: 18px;
+  background-color: #90caf9;
+  position: absolute;
+  top: 0px;
+  left: -13px;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 30%;
+  transform: rotate(-110deg);
+}
+
+.otherMessage .chatTime {
+  align-self: flex-end;
+}
+
+/* ============================================================
+　　　　　　　　　　　　　　共通スタイル
+============================================================ */
+
+.chatUser {
+  position: relative;
+}
+
+.chatName {
+  margin: 0;
+  position: absolute;
+  top: 0;
+  width: 400px;
+}
+
+.chatMessage {
+  margin: 0;
+  word-wrap: break-word;
 }

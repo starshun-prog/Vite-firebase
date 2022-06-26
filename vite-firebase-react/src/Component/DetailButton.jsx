@@ -102,7 +102,7 @@ const DetailButton = ({ params }) => {
                       <MenuItem
                         onClick={() => {
                           setAfterChanged("未対応");
-                          popupState.close;
+                          popupState.close();
                         }}
                       >
                         <Status params="未対応" />
@@ -110,7 +110,7 @@ const DetailButton = ({ params }) => {
                       <MenuItem
                         onClick={() => {
                           setAfterChanged("対応中");
-                          popupState.close;
+                          popupState.close();
                         }}
                       >
                         <Status params="対応中" />
@@ -118,7 +118,7 @@ const DetailButton = ({ params }) => {
                       <MenuItem
                         onClick={() => {
                           setAfterChanged("対応済");
-                          popupState.close;
+                          popupState.close();
                         }}
                       >
                         <Status params="対応済" />
